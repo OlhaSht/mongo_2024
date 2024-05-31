@@ -25,7 +25,7 @@ module.exports.getAllPosts = async (req, res, next)=>{
 module.exports.getPostsById = async (req, res, next)=>{
     try {
         const {body, params:{postId}} = req;
-        const posts = await Post.findById(postId, body, {new:true});
+        const posts = await Post.findById(postId, body);
         res.status(201).send(posts);
     } catch (error) {
         next(error)
@@ -37,7 +37,8 @@ module.exports.updatePosts = async (req, res, next)=>{
         const {body, params:{postId}} = req;
         const post = await Post.findByIdAndUpdate(postId, body,
              {new:true}, {runValidators:true})
-        //тут долна быть обработка ошибки через if
+        //тут долна быть обработка ошибки через if 
+        //colback без async/await
         res.status(200).send(post);
     } catch (error) {
         next(error);
