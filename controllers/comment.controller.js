@@ -39,10 +39,12 @@ module.exports.getAllComments = async(req, res, next)=>{
 module.exports.getAllCommentByPost = async(req, res, next)=>{
     try {
         const {params:{postId}} = req;
-        await Post.find(postId)
+        const allComments = await 
+        Comment.find({post: postId})
         .populate("postId")
         .populate("comments")
-        res.status(200).send()
+        .exec() 
+        res.status(200).send(allComments)
     } catch (error) {
        next(error) 
     }
