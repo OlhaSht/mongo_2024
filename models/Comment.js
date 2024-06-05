@@ -25,7 +25,10 @@ const commentSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'Post'
     }
-})
+},                     
+{versionKey:false,     //options
+  timestamps: true  
+});
 
 const Comment = mongoose.model('Comment', commentSchema);
 

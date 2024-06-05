@@ -4,6 +4,7 @@ const CommentController = require('./controllers/comment.controller');
 
 const app = express();
 app.use(express.json());
+
 app.post('/', PostController.createPost);
 app.get('/',PostController.getAllPosts);
 app.patch('/:postId',PostController.updatePosts);
@@ -11,7 +12,7 @@ app.delete('/:postId',PostController.deletePosts);
 
 app.post("/:postId/comments",CommentController.createComment);
 app.get("/comments",CommentController.getAllComments);
-// app.get("/:postId/comments",CommentController.getAllCommentByPost);
+app.get("/:postId/comments",CommentController.getAllCommentByPost);
 
 
 app.use((error, req,res,next) => {

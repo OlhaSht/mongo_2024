@@ -19,9 +19,11 @@ module.exports.getAllComments = async(req, res, next)=>{
     try {
         // const comments = await Comment.find();
         //res.status(200).send(comments);
-         await Comment.find()
+        //const {}= req;
+         const commentPost = await Comment.find()
         .populate("postId")
         .exec();
+        res.status(200).send(commentPost);
         // .exec((err,comments)=>{
         //     if(err){
         //         next(createError(400, "try again!"))
@@ -37,6 +39,10 @@ module.exports.getAllComments = async(req, res, next)=>{
 module.exports.getAllCommentByPost = async(req, res, next)=>{
     try {
         const {params:{postId}} = req;
+        await Post.find(postId)
+        .populate("postId")
+        .populate("comments")
+        res.status(200).send()
     } catch (error) {
        next(error) 
     }
@@ -48,4 +54,4 @@ module.exports.getAllCommentByPost = async(req, res, next)=>{
 //     } catch (error) {
         
 //     }
-// };
+// };ё
